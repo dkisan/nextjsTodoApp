@@ -14,10 +14,12 @@
     color: white;
     border-radius: 10px;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .dl{
     background-color: red;
     color: white;
     border-radius: 10px;
+    cursor: pointer;
 }
