@@ -2,8 +2,10 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import TodoList from '../components/TodoList'
 import { MongoClient } from 'mongodb';
+import { useRouter } from 'next/router';
 
 export default function Home(props) {
+  const router = useRouter()
 
   const completeHandler = async (id) => {
     const response = await fetch('/api/', {
@@ -14,6 +16,7 @@ export default function Home(props) {
     })
     const data = await response.json()
     console.log(data)
+    router.push('/completed-task')
   }
 
   return (
