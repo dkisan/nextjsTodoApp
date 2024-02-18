@@ -15,6 +15,17 @@ export default async (req, res) => {
     })
     console.log(result)
     await client.close()
-    res.status(201).json({ message: 'Meetup Inserted' })
+    res.status(201).json({ message: 'Todo Inserted' })
   }
+
+  if (req.method === 'DELETE') {
+    const data = JSON.parse(req.body)
+    const client = await MongoClient.connect('mongodb+srv://root:root@cluster0.bfusjly.mongodb.net/nextjs?retryWrites=true&w=majority');
+    const db = client.db();
+    const todocollection = db.collection('todos')
+    const result = await todocollection.deleteOne({ _id: new ObjectId(data.id) })
+    await client.close()
+    res.status(201).json({ message: 'Todo Deleted' })
+  }
+
 }

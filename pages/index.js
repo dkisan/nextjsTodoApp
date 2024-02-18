@@ -19,6 +19,20 @@ export default function Home(props) {
     router.push('/completed-task')
   }
 
+  const deleteHandler = async (id) => {
+    const response = await fetch('/api/', {
+      method: "DELETE",
+      body: JSON.stringify({
+        id: id
+      })
+    })
+    const data = await response.json()
+    console.log(data)
+    router.push('/')
+  }
+
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -27,7 +41,7 @@ export default function Home(props) {
       </Head>
       <h2><u>Today</u></h2>
       <div className={styles.main}>
-        <TodoList todolist={props.todo} setComplete={completeHandler} />
+        <TodoList todolist={props.todo} setComplete={completeHandler} deleteHandler={deleteHandler} />
       </div>
     </div>
   )
@@ -40,7 +54,7 @@ export async function getStaticProps() {
   const db = client.db();
   const meetupcollection = db.collection('todos')
   const result = await meetupcollection.find({
-    completed:false
+    completed: false
   }).toArray()
   await client.close()
 

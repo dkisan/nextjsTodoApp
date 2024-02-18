@@ -11,6 +11,7 @@ const apiHandler = async (req, res) => {
         await client.close()
         res.status(201).json({message:'Meetup Inserted'})
     } 
+ 
 }
 
 export default apiHandler;

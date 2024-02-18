@@ -7,13 +7,18 @@ const TodoList = (props) => {
         props.setComplete(id)
     }
 
+    const deleteHandler = (event) => {
+        const id = event.target.parentElement.getAttribute('id')
+        props.deleteHandler(id)
+    }
+
     return (
         <ul className={classes.u}>
             {props.todolist.map(tl => (
                 <li key={tl.id}>{tl.task}
                     <div id={tl.id}>
                         {!tl.completed && <button onClick={setComplete} className={classes.cmp}>Mark as Complete</button>}
-                        <button className={classes.dl}>Delete</button>
+                        <button onClick={deleteHandler} className={classes.dl}>Delete</button>
                         <button className={classes.ed}><Link href={`/${tl.id}`}>Edit</Link></button>
                     </div>
                 </li>
