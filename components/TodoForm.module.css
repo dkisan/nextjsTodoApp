@@ -1,0 +1,20 @@
+.f{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 60vw;
+}
+.f input{
+    border-radius: 10px;
+    line-height: 2rem;
+}
+.add{
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    width: max-content;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
