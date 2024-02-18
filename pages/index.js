@@ -1,17 +1,9 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import TodoList from '../components/TodoList'
+import { MongoClient } from 'mongodb';
 
 export default function Home(props) {
-  // const todo = [
-  //   { task: 'task1' },
-  //   { task: 'task2' },
-  //   { task: 'task3' }
-  // ]
-
-  const addtoTodo = (data) => {
-    props.todo.push(data)
-  }
 
   return (
     <div className={styles.container}>
@@ -28,15 +20,21 @@ export default function Home(props) {
 }
 
 export async function getStaticProps() {
-  const todo = [
-    { task: 'task1' },
-    { task: 'task2' },
-    { task: 'task3' }
-  ]
+  
 
-  return {
-    props: {
-      todo: todo
+  const client = await MongoClient.connect('mongodb+srv://root:root@cluster0.bfusjly.mongodb.net/nextjs?retryWrites=true&w=majority');
+    const db = client.db();
+    const meetupcollection = db.collection('todos')
+    const result = await meetupcollection.find().toArray()
+    await client.close()
+
+    return {
+        props: {
+            todo: result.map((m) => ({
+              task: m.task,
+              completed: m.completed,
+              id: m._id.toString()
+          }))
+        }
     }
-  }
 }

@@ -1,12 +1,16 @@
 import { useRef } from 'react';
 import classes from './TodoForm.module.css'
 
-const TodoForm = () => {
+const TodoForm = (props) => {
     const taskref = useRef()
 
-    const addHandler = (event)=>{
+    const addHandler = (event) => {
         event.preventDefault();
-        console.log(taskref.current.value)
+        const obj = {
+            task: taskref.current.value,
+            completed: false
+        }
+        props.addTodo(obj)
     }
 
     return (
